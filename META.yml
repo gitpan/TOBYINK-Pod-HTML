@@ -1,0 +1,40 @@
+---
+abstract: 'convert Pod to HTML like TOBYINK'
+author:
+  - 'Toby Inkster <tobyink@cpan.org>'
+build_requires:
+  ExtUtils::MakeMaker: 6.59
+configure_requires:
+  ExtUtils::MakeMaker: 6.59
+distribution_type: module
+dynamic_config: 0
+generated_by: 'Module::Install version 1.06'
+keywords: []
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+module_name: TOBYINK::Pod::HTML
+name: TOBYINK-Pod-HTML
+no_index:
+  directory:
+    - examples
+    - inc
+    - t
+    - xt
+recommends:
+  HTML::HTML5::Writer: 0.201
+  PPI::Document: 0
+  PPI::HTML: 0
+  XML::LibXML::PrettyPrint: 0
+requires:
+  HTML::HTML5::Parser: 0.208
+  Moo: 1.000008
+  XML::LibXML::QuerySelector: 0.003
+  perl: 5.14.0
+resources:
+  bugtracker: http://rt.cpan.org/Dist/Display.html?Queue=TOBYINK-Pod-HTML
+  homepage: https://metacpan.org/release/TOBYINK-Pod-HTML
+  license: http://dev.perl.org/licenses/
+  repository: https://bitbucket.org/tobyink/p5-tobyink-pod-html
+version: 0.001
