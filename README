@@ -63,6 +63,7 @@ DESCRIPTION
         are:
 
            +{
+              symbol        => 'color:#333;background-color:#fcc',
               pod           => 'color:#060',
               comment       => 'color:#060;font-style:italic',
               operator      => 'color:#000;font-weight:bold',
@@ -82,6 +83,14 @@ DESCRIPTION
               keyword       => 'color:#009;font-weight:bold',
               core          => 'color:#009;font-weight:bold',
               line_number   => 'color:#666',
+              # for non-Perl code
+              alert         => 'color:#f00;background-color:#ff0',
+              warning       => 'color:#f00;background-color:#ff0;font-style:italic',
+              error         => 'color:#f00;background-color:#ff0;font-style:italic;font-weight:bold',
+              bstring       => '',
+              function      => '',
+              regionmarker  => '',
+              others        => '',
            }
 
         Which looks kind of like the Perl highlighting from SciTE.
@@ -108,6 +117,30 @@ DESCRIPTION
         Convert pod from string to an HTML5 string.
 
         This feature requires HTML::HTML5::Writer.
+
+  Alternative Syntax Highlighting
+    This module defines an additional Pod command to change the language for
+    syntax highlighting. To tell TOBYINK::Pod::HTML to switch to, say,
+    Haskell instead of the default (Perl), just use:
+
+       =for highlighter language=Haskell
+
+    Then all subsequent code samples will be highlighted as Haskell, until
+    another such command is seen.
+
+    While syntax highlighting for Perl uses PPI::HTML, alternative syntax
+    highlighting uses Syntax::Highlight::Engine::Kate, so you need to have
+    that installed if you want that feature. Note that the language names
+    defined by Syntax::Highlight::Engine::Kate are case-sensitive, and
+    TOBYINK::Pod::HTML makes no attempt at case-folding, so you must use the
+    correct case!
+
+    Note that only the PPI highlighter supports line numbering.
+
+    The following command can be used to switch to plain text syntax
+    highlighting (i.e. no highlighting at all):
+
+       =for highlighter language=Text
 
 SEE ALSO
     Pod::Simple, PPI::HTML, etc.

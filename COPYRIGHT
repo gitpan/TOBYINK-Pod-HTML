@@ -3,10 +3,12 @@ Upstream-Name: TOBYINK-Pod-HTML
 Upstream-Contact: Toby Inkster <tobyink@cpan.org>
 Source: https://metacpan.org/release/TOBYINK-Pod-HTML
 
-Files: Changes
- HACKING
+Files: CONTRIBUTING
+ CREDITS
+ Changes
  LICENSE
  MANIFEST.SKIP
+ META.ttl
  Makefile.PL
  README
  bin/pod2html-tobyink
@@ -24,11 +26,6 @@ Files: inc/Module/Install.pm
  inc/Module/Install/Metadata.pm
  inc/Module/Install/Scripts.pm
 Copyright: Copyright 2002 - 2012 Brian Ingerson, Audrey Tang and Adam Kennedy.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: inc/unicore/Name.pm
- inc/utf8.pm
-Copyright: 1993-2012, Larry Wall and others
 License: GPL-1.0+ or Artistic-1.0
 
 Files: inc/Module/Install/TrustMetaYml.pm
@@ -55,11 +52,6 @@ License: GPL-1.0+ or Artistic-1.0
 
 Files: inc/Module/Install/Base.pm
 Copyright: Copyright 2003, 2004 by Audrey Tang <autrijus@autrijus.org>.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: inc/Scalar/Util.pm
-Copyright: Copyright (c) 1997-2007 Graham Barr <gbarr@pobox.com>. All rights reserved.
- Copyright (c) 1999 Tuomas J. Lukka <lukka@iki.fi>. All rights reserved.
 License: GPL-1.0+ or Artistic-1.0
 
 Files: inc/YAML/Tiny.pm
