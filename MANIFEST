@@ -3,6 +3,8 @@ Changes
 CONTRIBUTING
 COPYRIGHT
 CREDITS
+examples/rdf.html
+examples/rdf.pl
 examples/self.html
 inc/Module/AutoInstall.pm
 inc/Module/Install.pm

@@ -10,7 +10,7 @@ use XML::LibXML::QuerySelector ();
 	package TOBYINK::Pod::HTML::Helper;
 	
 	our $AUTHORITY = 'cpan:TOBYINK';
-	our $VERSION   = '0.002';
+	our $VERSION   = '0.003';
 	
 	use parent "Pod::Simple::HTML";
 	
@@ -22,12 +22,24 @@ use XML::LibXML::QuerySelector ();
 		return $self;
 	}
 	
+	sub _get_titled_section
+	{
+		my $self = shift;
+		my @r;
+		$self->{_in_get_titled_section} = 1;
+		wantarray
+			? (@r    = $self->SUPER::_get_titled_section(@_))
+			: ($r[0] = $self->SUPER::_get_titled_section(@_));
+		delete $self->{_in_get_titled_section};
+		wantarray ? @r : $r[0];
+	}
+	
 	sub get_token
 	{
 		my $self = shift;
 		my $tok = $self->SUPER::get_token;
 		
-		if (defined $tok and $tok->[0] eq 'start' and $tok->[1] eq 'for')
+		if (!$self->{_in_get_titled_section} and defined $tok and $tok->[0] eq 'start' and $tok->[1] eq 'for')
 		{
 			my $target = $tok->[2]{"target"};
 			my $data;
@@ -36,7 +48,7 @@ use XML::LibXML::QuerySelector ();
 				$data .= $tok->[1] if $tok->[0] eq 'text';
 				$tok = $self->SUPER::get_token;
 			}
-			print {$self->{"output_fh"}} "<!-- for $target $data -->\n";
+			${$self->output_string} .= "<!-- for $target $data -->\n";
 			$tok = $self->SUPER::get_token;
 		}
 		
@@ -48,7 +60,7 @@ use XML::LibXML::QuerySelector ();
 	package TOBYINK::Pod::HTML;
 	
 	our $AUTHORITY = 'cpan:TOBYINK';
-	our $VERSION   = '0.002';
+	our $VERSION   = '0.003';
 	
 	use Moo;
 	use Carp;
@@ -146,6 +158,13 @@ use XML::LibXML::QuerySelector ();
 	{
 		my $self = shift;
 		$self->string_to_dom(@_)->toString;
+	}
+	
+	sub _pull_code_styles
+	{
+		my $css  = shift->code_styles;
+		my %pull = @_;
+		$css->{$_} = $pull{$_} for grep !exists($css->{$_}), keys %pull;
 	}
 	
 	sub _pod_to_dom
@@ -259,10 +278,13 @@ use XML::LibXML::QuerySelector ();
 		my ($txt, $opt) = @_;
 		
 		return $txt
-			if lc $opt->{language} eq "text";
-			
+			if $opt->{language} =~ /^(text)$/i;
+		
 		return $self->_syntax_highlighting_for_text_via_ppi(@_)
-			if lc $opt->{language} eq "perl";
+			if $opt->{language} =~ /^(perl)$/i;
+		
+		return $self->_syntax_highlighting_for_text_via_shrdf(@_)
+			if $opt->{language} =~ /^(turtle|n.?triples|n.?quads|trig|n3|notation.?3|pret|pretdsl|sparql|sparql.?(update|query)|json|xml)$/i;
 		
 		return $self->_syntax_highlighting_for_text_via_kate(@_);
 	}
@@ -280,7 +302,29 @@ use XML::LibXML::QuerySelector ();
 		);
 		return $hlt->html("PPI::Document"->new(\$txt));
 	}
-	
+
+	sub _syntax_highlighting_for_text_via_shrdf
+	{
+		my $self = shift;
+		my ($txt, $opt) = @_;
+		
+		require Syntax::Highlight::RDF;
+		require Syntax::Highlight::XML;
+		require Syntax::Highlight::JSON2;
+		
+		# Syntax::Highlight::RDF uses different CSS classes
+		my $css = $self->code_styles;
+		$self->_pull_code_styles(%Syntax::Highlight::RDF::STYLE)
+			unless $css->{rdf_comment};
+		$self->_pull_code_styles(%Syntax::Highlight::XML::STYLE)
+			unless $css->{xml_tag_is_doctype};
+		$self->_pull_code_styles(%Syntax::Highlight::JSON2::STYLE)
+			unless $css->{json_boolean};
+		
+		my $hlt = "Syntax::Highlight::RDF"->highlighter($opt->{language});
+		return $hlt->highlight(\$txt);
+	}
+
 	# Does not support line numbers
 	sub _syntax_highlighting_for_text_via_kate
 	{
@@ -500,12 +544,14 @@ instead of the default (Perl), just use:
 Then all subsequent code samples will be highlighted as Haskell, until
 another such command is seen.
 
-While syntax highlighting for Perl uses L<PPI::HTML>, alternative syntax
-highlighting uses L<Syntax::Highlight::Engine::Kate>, so you need to have
-that installed if you want that feature. Note that the language names
-defined by Syntax::Highlight::Engine::Kate are case-sensitive, and
-TOBYINK::Pod::HTML makes no attempt at case-folding, so you must use the
-correct case!
+While syntax highlighting for Perl uses L<PPI::HTML>, syntax highlighting
+for other languages uses either L<Syntax::Highlight::RDF> or
+L<Syntax::Highlight::Engine::Kate> as appropriate, so you need to have
+them installed if you want this feature.
+
+Note that the language names defined by Syntax::Highlight::Engine::Kate
+are case-sensitive, and TOBYINK::Pod::HTML makes no attempt at case-folding,
+so you must use the correct case!
 
 Note that only the PPI highlighter supports line numbering.
 

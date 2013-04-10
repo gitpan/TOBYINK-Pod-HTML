@@ -12,6 +12,8 @@ Files: CONTRIBUTING
  Makefile.PL
  README
  bin/pod2html-tobyink
+ examples/rdf.html
+ examples/rdf.pl
  examples/self.html
  meta/changes.pret
  meta/doap.pret

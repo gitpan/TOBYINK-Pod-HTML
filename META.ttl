@@ -34,6 +34,7 @@ dist:project
 	cpant:recommends  "PPI::Document"^^cpant:dsWithoutVersion;
 	cpant:recommends  "PPI::HTML"^^cpant:dsWithoutVersion;
 	cpant:recommends  "Syntax::Highlight::Engine::Kate"^^cpant:dsWithoutVersion;
+	cpant:recommends  "Syntax::Highlight::RDF"^^cpant:dsWithoutVersion;
 	cpant:recommends  "XML::LibXML::PrettyPrint"^^cpant:dsWithoutVersion;
 	cpant:requires    "HTML::HTML5::Parser 0.208"^^cpant:dsWithVersion;
 	cpant:requires    "Moo 1.000008"^^cpant:dsWithVersion;
@@ -56,6 +57,7 @@ dist:project
 	doap:programming-language "Perl";
 	doap:release      dist:v_0-001;
 	doap:release      dist:v_0-002;
+	doap:release      dist:v_0-003;
 	doap:repository   [
 		a doap:HgRepository;
 		doap:browse <https://bitbucket.org/tobyink/p5-tobyink-pod-html>;
@@ -84,6 +86,24 @@ dist:v_0-002
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/TOBYINK-Pod-HTML-0.002.tar.gz>;
 	doap:revision     "0.002"^^xsd:string.
+
+dist:v_0-003
+	a                 doap:Version;
+	dc:identifier     "TOBYINK-Pod-HTML-0.003"^^xsd:string;
+	dc:issued         "2013-04-10"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Syntax highlighting for Semantic Web related languages using Syntax::Highlight::RDF.";
+		];
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Switching syntax highlight language in documents that have no NAME section was broken due to Pod::Simple::PullParser's look-ahead feature. This should now work.";
+		];
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/TOBYINK-Pod-HTML-0.003.tar.gz>;
+	doap:revision     "0.003"^^xsd:string.
 
 cpan:tobyink
 	a                 foaf:Person;

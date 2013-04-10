@@ -27,6 +27,7 @@ recommends:
   PPI::Document: 0
   PPI::HTML: 0
   Syntax::Highlight::Engine::Kate: 0
+  Syntax::Highlight::RDF: 0
   XML::LibXML::PrettyPrint: 0
 requires:
   HTML::HTML5::Parser: 0.208
@@ -38,4 +39,4 @@ resources:
   homepage: https://metacpan.org/release/TOBYINK-Pod-HTML
   license: http://dev.perl.org/licenses/
   repository: https://bitbucket.org/tobyink/p5-tobyink-pod-html
-version: 0.002
+version: 0.003
