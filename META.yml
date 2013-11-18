@@ -1,27 +1,33 @@
 ---
 abstract: 'convert Pod to HTML like TOBYINK'
 author:
-  - 'Toby Inkster <tobyink@cpan.org>'
-build_requires:
-  ExtUtils::MakeMaker: 6.59
+  - 'Toby Inkster (TOBYINK) <tobyink@cpan.org>'
+build_requires: {}
 configure_requires:
-  ExtUtils::MakeMaker: 6.59
-distribution_type: module
+  ExtUtils::MakeMaker: 6.17
 dynamic_config: 0
-generated_by: 'Module::Install version 1.06'
+generated_by: 'Dist::Inkt::Profile::TOBYINK version 0.013, CPAN::Meta::Converter version 2.120921'
 keywords: []
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
-module_name: TOBYINK::Pod::HTML
 name: TOBYINK-Pod-HTML
 no_index:
   directory:
+    - eg
     - examples
     - inc
     - t
     - xt
+optional_features: {}
+provides:
+  TOBYINK::Pod::HTML:
+    file: lib/TOBYINK/Pod/HTML.pm
+    version: 0.004
+  TOBYINK::Pod::HTML::Helper:
+    file: lib/TOBYINK/Pod/HTML.pm
+    version: 0.004
 recommends:
   HTML::HTML5::Writer: 0.201
   PPI::Document: 0
@@ -33,10 +39,13 @@ requires:
   HTML::HTML5::Parser: 0.208
   Moo: 1.000008
   XML::LibXML::QuerySelector: 0.003
-  perl: 5.14.0
 resources:
+  X_identifier: http://purl.org/NET/cpan-uri/dist/TOBYINK-Pod-HTML/project
   bugtracker: http://rt.cpan.org/Dist/Display.html?Queue=TOBYINK-Pod-HTML
   homepage: https://metacpan.org/release/TOBYINK-Pod-HTML
   license: http://dev.perl.org/licenses/
-  repository: https://bitbucket.org/tobyink/p5-tobyink-pod-html
-version: 0.003
+  repository: https://github.com/tobyink/p5-tobyink-pod-html
+version: 0.004
+x_provides_scripts:
+  pod2html-tobyink:
+    file: bin/pod2html-tobyink
