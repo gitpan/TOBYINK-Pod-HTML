@@ -6,7 +6,7 @@ build_requires: {}
 configure_requires:
   ExtUtils::MakeMaker: 6.17
 dynamic_config: 0
-generated_by: 'Dist::Inkt::Profile::TOBYINK version 0.013, CPAN::Meta::Converter version 2.120921'
+generated_by: 'Dist::Inkt::Profile::TOBYINK version 0.014, CPAN::Meta::Converter version 2.120921'
 keywords: []
 license: perl
 meta-spec:
@@ -24,10 +24,10 @@ optional_features: {}
 provides:
   TOBYINK::Pod::HTML:
     file: lib/TOBYINK/Pod/HTML.pm
-    version: 0.004
+    version: 0.005
   TOBYINK::Pod::HTML::Helper:
     file: lib/TOBYINK/Pod/HTML.pm
-    version: 0.004
+    version: 0.005
 recommends:
   HTML::HTML5::Writer: 0.201
   PPI::Document: 0
@@ -45,7 +45,7 @@ resources:
   homepage: https://metacpan.org/release/TOBYINK-Pod-HTML
   license: http://dev.perl.org/licenses/
   repository: https://github.com/tobyink/p5-tobyink-pod-html
-version: 0.004
+version: 0.005
 x_provides_scripts:
   pod2html-tobyink:
     file: bin/pod2html-tobyink

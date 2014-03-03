@@ -6,6 +6,11 @@ Home page:    <https://metacpan.org/release/TOBYINK-Pod-HTML>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=TOBYINK-Pod-HTML>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.005	2014-03-03
+
+ - Updated: Update links to use https://metacpan.org/pod/ instead of
+   https://metacpan.org/module/.
+
 0.004	2013-11-18
 
  [ Bug Fixes ]

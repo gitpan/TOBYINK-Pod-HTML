@@ -7,7 +7,7 @@ my $meta = {
   "abstract"           => "convert Pod to HTML like TOBYINK",
   "author"             => ["Toby Inkster (TOBYINK) <tobyink\@cpan.org>"],
   "dynamic_config"     => 0,
-  "generated_by"       => "Dist::Inkt::Profile::TOBYINK version 0.013, CPAN::Meta::Converter version 2.120921",
+  "generated_by"       => "Dist::Inkt::Profile::TOBYINK version 0.014, CPAN::Meta::Converter version 2.120921",
   "keywords"           => [],
   "license"            => ["perl_5"],
   "meta-spec"          => {
@@ -35,8 +35,8 @@ my $meta = {
                                          },
                           },
   "provides"           => {
-                            "TOBYINK::Pod::HTML"         => { file => "lib/TOBYINK/Pod/HTML.pm", version => 0.004 },
-                            "TOBYINK::Pod::HTML::Helper" => { file => "lib/TOBYINK/Pod/HTML.pm", version => 0.004 },
+                            "TOBYINK::Pod::HTML"         => { file => "lib/TOBYINK/Pod/HTML.pm", version => 0.005 },
+                            "TOBYINK::Pod::HTML::Helper" => { file => "lib/TOBYINK/Pod/HTML.pm", version => 0.005 },
                           },
   "release_status"     => "stable",
   "resources"          => {
@@ -51,7 +51,7 @@ my $meta = {
                                             },
                             X_identifier => "http://purl.org/NET/cpan-uri/dist/TOBYINK-Pod-HTML/project",
                           },
-  "version"            => 0.004,
+  "version"            => 0.005,
   "x_provides_scripts" => { "pod2html-tobyink" => { file => "bin/pod2html-tobyink" } },
 };
 
@@ -64,6 +64,7 @@ my %WriteMakefileArgs = (
 	VERSION    => $meta->{version},
 	EXE_FILES  => [ map $_->{file}, values %{ $meta->{x_provides_scripts} || {} } ],
 	NAME       => do { my $n = $meta->{name}; $n =~ s/-/::/g; $n },
+	test       => { TESTS => "t/*.t" },
 	%dynamic_config,
 );
 
